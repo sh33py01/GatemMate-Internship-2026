@@ -143,6 +143,10 @@ Or use the provided `build.sh` in each project directory.
 
 ---
 
+> **Note:** SW1 (CFG_MODE): switches 1 and 2 ON, switches 3 and 4 OFF
+>→ selects JTAG configuration mode
+>→ required for programming via openFPGALoader
+
 ## Phase 0 — UART Echo Test (`00_uart_echo/`)
 
 This was the very first working design — a simple UART echo that runs directly
@@ -422,26 +426,6 @@ picocom -b 57600 --omap crcrlf /dev/ttyUSB2
 5. Reconnect cable
 6. Observe: returns to [OK] Mode: COMMA
 ```
-
----
-
-## Replication Checklist
-
-Follow this order to replicate all experiments from scratch:
-
-- [ ] Install OSS CAD Suite and activate environment
-- [ ] Install usbipd-win (Windows) and attach USB devices
-- [ ] Verify `/dev/ttyUSB0`, `/dev/ttyUSB1`, `/dev/ttyUSB2` appear in WSL2
-- [ ] Wire UART adapter to J17A (grey=pin1, orange=pin2, black=pin5)
-- [ ] **Phase 0:** Flash `00_uart_echo`, type any character → echoed back
-- [ ] **Phase 1:** Flash `01_uart_cmd`, type `status` → `GateMate OK`
-- [ ] **Phase 2:** Flash `02_hyperram`, test `write 00 ab` and `read 00`
-- [ ] Solder SMA connectors and X3 oscillator
-- [ ] Install JP6 jumper
-- [ ] Connect loopback cables J15↔J13 and J14↔J12
-- [ ] **Phase 3a:** Flash `03_serdes_loopback`, verify D1+D2+D3 ON
-- [ ] **Phase 3b:** Flash `04_serdes_cmd`, verify `[OK] Mode: COMMA` in terminal
-- [ ] (Optional) Connect oscilloscope to J15, type `prbs`, capture eye diagram
 
 ---
 
