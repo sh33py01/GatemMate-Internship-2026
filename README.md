@@ -279,6 +279,10 @@ Use `03_serdes_loopback/` or `04_serdes_cmd/` for actual experiments.
 ## Phase 3b — SerDes Basic Loopback (`03_serdes_loopback/`)
 
 ### Hardware Setup (required before flashing)
+
+> **Replication note:** The SerDes will NOT initialise if any of these are missing:
+> JP6 jumper installed, X3 oscillator soldered, SMA cables connected, SW3 pressed after flash.
+
 1. Solder SMA connectors J9, J11–J15 to the board
 2. Solder SerDes reference clock oscillator X3 (LVDS, 125 MHz) near J9
 3. Install jumper on **JP6** (powers SerDes PMA)
@@ -329,7 +333,7 @@ cd 03_serdes_loopback
 
 ---
 
-## Phase 3b — SerDes Interactive Commands (`04_serdes_cmd/`)
+## Phase 3c — SerDes Interactive Commands (`04_serdes_cmd/`)
 
 This is the main SerDes demo with full UART command interface, automatic 
 status reporting every 2 seconds, and oscilloscope-ready test patterns.
@@ -367,8 +371,26 @@ HELP    — List all commands
 [!!] Mode: COMMA    — SerDes not initialised
 ```
 
-### Oscilloscope Measurements
+### Oscilloscope Connection (to replicate measurements)
+
 Connect probe to **J15 (TX+)** and GND.
+
+| Setting | Value |
+|---------|-------|
+| Probe connection | J15 (TX+) to GND — single ended |
+| Probe impedance | **50Ω** |
+| Vertical scale | **50 mV/div** |
+| Horizontal scale | **200 ps/div** |
+| Trigger | Auto |
+| Mode | Persistence (for eye diagram) |
+| Pattern to use | `prbs` command |
+
+**Approximate line rate:** ~1 Gbit/s  
+(125 MHz LVDS reference × internal ADPLL multiplier, 80-bit datapath)
+
+**Measured peak-to-peak voltage:** 181.17 mV  
+**Oscilloscope used:** Keysight InfiniiVision DSOX6004A, 20 GSa/s  
+**Date:** May 4, 2026
 
 | Mode | What you see | Use for |
 |------|-------------|---------|
@@ -376,17 +398,6 @@ Connect probe to **J15 (TX+)** and GND.
 | PRBS | Pseudo-random transitions | **Eye diagram** (persistence mode) |
 | IDLE | Near-zero differential voltage | Confirming electrical idle |
 | COUNT | Structured incrementing pattern | Pattern recognition |
-
-**Line rate calculation from bit period:**
-```
-f_line (Gbit/s) = 1 / T_bit (seconds)
-```
-
-**Measured results (Keysight InfiniiVision DSOX6004A, 20 GSa/s):**
-- Vertical scale: 50 mV/div
-- Horizontal scale: 200 ps/div  
-- Peak-to-peak voltage: **181.17 mV**
-- Date: May 4, 2026
 
 ### Quick Start
 ```bash
