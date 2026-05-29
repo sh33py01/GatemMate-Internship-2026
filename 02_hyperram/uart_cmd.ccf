@@ -1,0 +1,18 @@
+Pin_in    "clk"        Loc = "IO_SB_A8" | SCHMITT_TRIGGER=true;
+Pin_in    "rx"         Loc = "IO_NB_A2" | PULLUP=true;
+Pin_out   "tx"         Loc = "IO_NB_A1";
+Pin_out   "led"        Loc = "IO_EB_B1";
+Net       "clk_fast"   PERIOD = 20ns;
+Pin_out   "hram_clk_p" Loc = "IO_WB_A3";
+Pin_out   "hram_clk_n" Loc = "IO_WB_B3";
+Pin_out   "hram_cs_n"  Loc = "IO_WB_B0";
+Pin_out   "hram_rst_n" Loc = "IO_WB_A2";
+Pin_inout "hram_dq[0]" Loc = "IO_WB_A5";
+Pin_inout "hram_dq[1]" Loc = "IO_WB_B5";
+Pin_inout "hram_dq[2]" Loc = "IO_WB_A6";
+Pin_inout "hram_dq[3]" Loc = "IO_WB_B6";
+Pin_inout "hram_dq[4]" Loc = "IO_WB_A7";
+Pin_inout "hram_dq[5]" Loc = "IO_WB_B7";
+Pin_inout "hram_dq[6]" Loc = "IO_WB_A8";
+Pin_inout "hram_dq[7]" Loc = "IO_WB_B8";
+Pin_inout "hram_rwds"  Loc = "IO_WB_B4";

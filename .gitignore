@@ -1,0 +1,19 @@
+# Build outputs
+*.json
+*.txt
+*.bit
+*.log
+
+# OSS CAD Suite temp files
+*.asc
+*.rpt
+
+# Keep source files
+!*.v
+!*.ccf
+!*.sh
+!*.md
+!*.pdf
+!*.jpeg
+!*.jpg
+!*.png
